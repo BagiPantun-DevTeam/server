@@ -14,17 +14,20 @@ class UserController {
           username: req.body.username,
           email: req.body.email,
           password: hash,
-        }, function (response) {
-          if (err) {
-            res
-              .status(400)
-              .send(err);
-          } else {
-            res
-              .status(200);
-          }
+        })
+        .then((response) => {
+          res
+            .status(200)
+            .send(response);
+        })
+        .catch((err) => {
+          res
+            .status(400)
+            .send(err);
         });
       }
     });
   }
 }
+
+module.exports = UserController;
