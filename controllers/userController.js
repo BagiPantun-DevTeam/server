@@ -28,6 +28,20 @@ class UserController {
       }
     });
   }
+
+  static getUserById(req, res) {
+    user.findById(req.params.id, function (err, userData) {
+      if (err) {
+        res
+          .status(400)
+          .send(err);
+      } else {
+        res
+          .status(200)
+          .send(userData);
+      }
+    });
+  }
 }
 
 module.exports = UserController;
