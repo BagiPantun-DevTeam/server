@@ -24,7 +24,7 @@ const userSchema = mongoose.Schema({
   },
   posts: [{
     type: Schema.Types.ObjectId,
-    ref: 'Book',
+    ref: 'Post',
   }]
 }, {
   timestamps: {
