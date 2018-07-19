@@ -6,7 +6,7 @@ class PostController {
     post.create({
       content: req.body.content,
       imageSource: req.body.imageSource,
-      userId: req.body.userId,
+      owner: req.body.owner,
     })
     .then((response) => {
       res
@@ -33,6 +33,8 @@ class PostController {
         .send(err);
     });
   }
+
+
 }
 
 module.exports = PostController;
