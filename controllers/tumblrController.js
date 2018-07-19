@@ -1,4 +1,5 @@
 const OAuth = require("oauth");
+require('dotenv').config()
 var apiKey = "kczAIlqJdOf8EnPjMvegH0HZgbH3pg8mp3LrstnZMyoBcjYHnK"
 var blog = "hacktiv8poem.tumblr.com"
 var userToken = "2stGBwLgWccc1ETWKlmPuZysQqhU4MLDpSPhjKWKRUg6RcVyjn"

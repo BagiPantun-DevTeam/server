@@ -5,7 +5,10 @@ function verifyToken(req,res,next){
     if(typeof token !== undefined) {
         jwt.verify(token, 'secret', function(err, decoded) {
             if(err){
-                console.log(err);
+                res
+                .status(400)
+                .json(err);
+                // console.log(err);
             }else{
                 if(decoded){
                     next();

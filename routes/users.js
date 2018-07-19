@@ -7,9 +7,9 @@ const tumblrController = require("../controllers/tumblrController")
 
 router.post('/signup', userController.signUp);
 router.post('/signin', userController.signIn);
-router.post('/quotes', tumblrController.postQuote);
-router.post('/text',tumblrController.postText);
-router.post('/image', tumblrController.postPicture);
+router.post('/quotes',tokenMiddleware, tumblrController.postQuote);
+router.post('/text',tokenMiddleware,tumblrController.postText);
+router.post('/image',tokenMiddleware,tumblrController.postPicture);
 
 // router.post('/signin')
 
