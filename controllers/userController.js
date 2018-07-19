@@ -1,9 +1,10 @@
 const mongoose = require('mongoose');
 const user = require('../models/user');
 const bcrypt = require('bcryptjs');
+const jwt = require("jsonwebtoken");
 
 class UserController {
-  static addNewUser(req, res) {
+  static signUp(req, res) {
     bcrypt.hash(req.body.password, 8, function (err, hash) {
       if (err) {
         res
@@ -27,6 +28,48 @@ class UserController {
         });
       }
     });
+  }
+
+  static signIn(req,res){
+    let password = req.body.password
+    user.findOne({username : req.body.username},(err,data)=>{
+      if(data === null){
+        res
+        .status(401)
+        .json({
+          msg: "wrong email"
+        })
+      }else{
+        let hash = data.password
+        bcrypt.compare(password,hash,(err,result)=>{
+          if(true){
+            jwt.sign({
+              email : data.email,
+              username : data.username
+            },"secret",(err,token)=>{
+              if(err){
+                res
+                .status(500)
+                .json({
+                  msg: "internal server error"
+                })
+              }else{
+                res
+                .status(200)
+                .json(token);
+              }
+            })
+          }else{
+            res
+            .status(401)
+            .json({
+              msg: "wrong password"
+            })
+          }
+        })
+      }
+    })
+    
   }
 }
 
