@@ -10,4 +10,8 @@ router.get('/', function (req, res) {
   postController.getAllPosts(req, res);
 });
 
+router.get('/:userId', function (req, res) {
+  postController.getPostByUserId(req, res);
+});
+
 module.exports = router;

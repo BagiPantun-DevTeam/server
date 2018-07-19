@@ -34,7 +34,21 @@ class PostController {
     });
   }
 
-
+  static getPostByUserId(req, res) {
+    post.find({
+      owner: req.params.userId,
+    })
+    .then((response) => {
+      res
+        .status(200)
+        .send(response);
+    })
+    .catch((err) => {
+      res
+        .status(400)
+        .send(err);
+    });
+  }
 }
 
 module.exports = PostController;
