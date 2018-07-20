@@ -1,29 +1,21 @@
 var express = require('express');
 var router = express.Router();
+const axios = require('axios');
+require('es6-promise').polyfill();
+require('isomorphic-fetch');
 const Unsplash = require('unsplash-js').default;
-const dotenv = require('dotenv');
-
-const unsplash = new Unsplash({
-  applicationId: process.env.APP_ACCESS_KEY,
-  secret: process.env.APP_SECRET,
-  callbackUrl: process.env.CALLBACK_URL,
-});
+require('dotenv');
 
 router.get('/', function (req, res) {
-  unsplash.photos.getRandomPhoto({ collections: [2385134] })
-  .then((photoData) => {
-    res
-      .send(photoData)
-      .status(200);
+  axios.get("https://api.unsplash.com/photos/random/?collections=2385134&access_token=cedfa9e95c09e044eb8a11f8405315bab25e0cbf7f1dbef3a544589bbae68ce7")
+  .then((jsonPhotoData) => {
+    res.status(200)
+    res.send(jsonPhotoData.data.urls.regular);
   })
   .catch((err) => {
-    res
-      .send(err)
-      .status(400);
-  })
-  // .then(json => {
-  //
-  // });
+    res.status(400)
+    res.send(err);
+  });
 });
 
 module.exports = router;
