@@ -29,47 +29,62 @@ class UserController {
       }
     });
   }
-
-  static signIn(req,res){
-    let password = req.body.password
-    user.findOne({username : req.body.username},(err,data)=>{
-      if(data === null){
-        res
-        .status(401)
-        .json({
-          msg: "wrong email"
-        })
-      }else{
-        let hash = data.password
-        bcrypt.compare(password,hash,(err,result)=>{
-          if(true){
-            jwt.sign({
-              email : data.email,
-              username : data.username
-            },"secret",(err,token)=>{
-              if(err){
-                res
-                .status(500)
-                .json({
-                  msg: "internal server error"
-                })
-              }else{
-                res
-                .status(200)
-                .json(token);
-              }
-            })
-          }else{
-            res
-            .status(401)
-            .json({
-              msg: "wrong password"
-            })
-          }
-        })
-      }
-    })
     
+  static getUserById(req, res) {
+    user.findById(req.params.id, function (err, userData) {
+      if (err) {
+        res
+          .status(400)
+          .send(err);
+      } else {
+        res
+          .status(200)
+          .send(userData);
+      }
+    });
+  }
+  
+    static signIn(req, res) {
+    let password = req.body.password;
+    user.findOne({
+      username: req.body.username,
+    }, (err, data) => {
+      if (data === null) {
+        res
+          .status(401)
+          .json({
+            msg: 'wrong email',
+          });
+      } else {
+        let hash = data.password;
+        bcrypt.compare(password, hash, (err, result) => {
+          if (true) {
+            jwt.sign({
+              email: data.email,
+              username: data.username,
+            }, 'secret', (err, token) => {
+              if (err) {
+                res
+                  .status(500)
+                  .json({
+                    msg: 'internal server error',
+                  });
+              } else {
+                res
+                  .status(200)
+                  .json(token);
+              }
+            });
+          } else {
+            res
+              .status(401)
+              .json({
+                msg: 'wrong password',
+              });
+          }
+        });
+      }
+    });
   }
 }
 
