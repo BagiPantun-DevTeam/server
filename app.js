@@ -7,7 +7,7 @@ const mongoose = require('mongoose');
 var cors = require('cors');
 require('dotenv');
 
-var indexRouter = require('./routes/index');
+var gcsRouter = require('./routes/gcs');
 var usersRouter = require('./routes/users');
 const postsRouter = require('./routes/posts');
 
@@ -29,6 +29,7 @@ var app = express();
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'jade');
 
+app.use(cors());
 app.use(logger('dev'));
 app.use(express.json());
 app.use(express.urlencoded({
@@ -37,7 +38,7 @@ app.use(express.urlencoded({
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
-app.use('/', indexRouter);
+app.use('/gcs', gcsRouter);
 app.use('/users', usersRouter);
 app.use('/posts', postsRouter);
 
