@@ -42,8 +42,9 @@ class Controller {
         }
       }
     );
-  }
 
+    // https://api.tumblr.com/v2/blog/citriccomics.tumblr.com/posts/text?api_key={key}
+  }
 
   static postText(req, res) {
     let terserah = req.body.text;
