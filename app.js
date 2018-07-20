@@ -4,7 +4,7 @@ var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
 const mongoose = require('mongoose');
-var cors = require('cors')
+var cors = require('cors');
 require('dotenv');
 
 var gcsRouter = require('./routes/gcs');
