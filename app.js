@@ -10,6 +10,7 @@ require('dotenv');
 var gcsRouter = require('./routes/gcs');
 var usersRouter = require('./routes/users');
 const postsRouter = require('./routes/posts');
+const unsplashRouter = require('./routes/unsplash');
 
 mongoose.connect('mongodb://admin:abc123@ds243931.mlab.com:43931/poem', {
   useNewUrlParser: true,
@@ -41,6 +42,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.use('/gcs', gcsRouter);
 app.use('/users', usersRouter);
 app.use('/posts', postsRouter);
+app.use('unsplash', unsplashRouter);
 
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {
