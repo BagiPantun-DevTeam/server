@@ -4,13 +4,14 @@ var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
 const mongoose = require('mongoose');
+var cors = require('cors')
 require('dotenv');
 
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
 const postsRouter = require('./routes/posts');
 
-mongoose.connect('mongodb://localhost:27017/BagiPantun', {
+mongoose.connect('mongodb://admin:abc123@ds243931.mlab.com:43931/poem', {
   useNewUrlParser: true,
 });
 
