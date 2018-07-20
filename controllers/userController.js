@@ -60,6 +60,7 @@ class UserController {
         bcrypt.compare(password, hash, (err, result) => {
           if (true) {
             jwt.sign({
+              id: data.id,
               email: data.email,
               username: data.username,
             }, 'secret', (err, token) => {
