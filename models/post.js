@@ -5,10 +5,6 @@ const postSchema = mongoose.Schema({
   content: {
     type: String,
     required: true,
-
-    // content character limit will be decided later on
-    // min:
-    // max:
   },
   imageSource: {
     type: String,
