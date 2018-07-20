@@ -4,11 +4,12 @@ var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
 const mongoose = require('mongoose');
-var cors = require('cors')
+var cors = require('cors');
 require('dotenv');
 
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
+const postsRouter = require('./routes/posts');
 
 mongoose.connect('mongodb://admin:abc123@ds243931.mlab.com:43931/poem', {
   useNewUrlParser: true,
@@ -38,6 +39,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/', indexRouter);
 app.use('/users', usersRouter);
+app.use('/posts', postsRouter);
 
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {
